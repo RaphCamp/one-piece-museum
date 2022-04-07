@@ -1,0 +1,36 @@
+<div class="body">
+  
+  <h2>Mes Pièces</h2>
+
+  <div class="d-flex flex-row justify-content-center flex-wrap">
+    <div *ngFor="let piece of pieces" class="p-2" >
+      <div class="card bg-light mb-3" class="gallery" >
+        <div class="card-header" >
+                  {{piece.id}} : {{piece.name | uppercase}} 
+        </div>
+        <div class="card-body">
+          <a target="_blank" href="../../images/Akainu.jpg">
+            <img src="../../images/Akainu.jpg" alt="Akainu" width="600" height="400">
+          </a>
+          <p>      <button [class.selected]="piece === selectedPiece" type="button" (click)="onSelect(piece)">Select</button>     </p>
+        </div>
+      </div>
+    </div>
+  </div>
+  
+  
+  <h3>sdsd
+    
+  </h3>
+  <br><br>
+  <p>ssdsd</p>
+  
+    <app-detail-view [piece]="selectedPiece"></app-detail-view>
+  
+
+</div>
+
+
+
+
+   
