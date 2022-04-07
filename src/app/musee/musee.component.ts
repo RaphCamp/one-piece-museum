@@ -1,6 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Piece } from '../piece';
 import { PIECES } from '../mock-pieces';
+import { PieceService } from '../piece.service';
 
 @Component({
   selector: 'musee',
@@ -9,16 +10,21 @@ import { PIECES } from '../mock-pieces';
 })
 export class MuseeComponent implements OnInit {
 
-  constructor() { }
+  constructor(private pieceService: PieceService) { }
 
   ngOnInit(): void {
+    this.getPieces();
   }
-
-  pieces = PIECES;
 
   selectedPiece?: Piece;
 onSelect(piece: Piece): void {
   this.selectedPiece = piece;
 }
+  pieces : Piece[] = [];
+
+  getPieces() : void {
+    this.pieceService.getPieces().subscribe(pieces => this.pieces = pieces);
+  }
+
 
 }
