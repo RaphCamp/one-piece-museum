@@ -14,6 +14,7 @@ import { DetailViewComponent } from './detail-view/detail-view.component';
 import { MuseeComponent} from './musee/musee.component';
 import { AppRoutingModule } from './app-routing.module';
 import { PieceSearchComponent } from './piece-search/piece-search.component';
+import { MessagesComponent } from './messages/messages.component';
 
 
 @NgModule({
@@ -23,7 +24,8 @@ import { PieceSearchComponent } from './piece-search/piece-search.component';
     IdentificationComponent,
     DetailViewComponent,
     MuseeComponent,
-    PieceSearchComponent
+    PieceSearchComponent,
+    MessagesComponent
   ],
   imports: [
     BrowserModule,

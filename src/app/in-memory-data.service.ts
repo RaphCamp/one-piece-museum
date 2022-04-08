@@ -7,19 +7,19 @@ import { Piece } from './piece';
 })
 export class InMemoryDataService implements InMemoryDbService {
   createDb() {
-    const pieces = [
-      { id: 11, name: 'Dr Nice' },
-      { id: 12, name: 'Narco' },
-      { id: 13, name: 'Bombasto' },
-      { id: 14, name: 'Celeritas' },
-      { id: 15, name: 'Magneta' },
-      { id: 16, name: 'RubberMan' },
-      { id: 17, name: 'Dynama' },
-      { id: 18, name: 'Dr IQ' },
-      { id: 19, name: 'Magma' },
-      { id: 20, name: 'Tornado' }
-    ];
-    return {pieces};
+    const pieces : Piece[] = [
+      { id: 11, name: 'Luffy', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 12, name: 'Zoro', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 13, name: 'Nami', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 14, name: 'Usopp', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 15, name: 'Sanji', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 16, name: 'Chopper', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 17, name: 'Robin', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 18, name: 'Franky', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 19, name: 'Brook', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+      { id: 20, name: 'Jimbe', desc: 'banpresto',photo: "../../images/Akainu.jpg", prix: 50, note: 10,date:'Janvier 2020',galerie:["../../images/Akainu.jpg","../../images/Akainu.jpg"] },
+  ];
+      return {pieces};
   }
 
   // Overrides the genId method to ensure that a hero always has an id.

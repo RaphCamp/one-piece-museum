@@ -16,14 +16,17 @@ export class MuseeComponent implements OnInit {
     this.getPieces();
   }
 
-  selectedPiece?: Piece;
-onSelect(piece: Piece): void {
-  this.selectedPiece = piece;
-}
   pieces : Piece[] = [];
 
   getPieces() : void {
     this.pieceService.getPieces().subscribe(pieces => this.pieces = pieces);
+  }
+
+  add(name : string) : void {
+    name = name.trim();
+    if (!name) {return;}
+    this.pieceService.addPiece({name} as Piece).subscribe(piece => {this.pieces.push(piece);
+    });
   }
 
 

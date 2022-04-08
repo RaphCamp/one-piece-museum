@@ -7,7 +7,8 @@ import { IdentificationComponent  } from './identification/identification.compon
 
 
 const routes: Routes = [
-  { path: 'detail', component: DetailViewComponent },
+  { path: '', redirectTo: '/musee', pathMatch: 'full' },
+  { path: 'detail/:id', component: DetailViewComponent },
   { path: 'musee', component: MuseeComponent },
   { path: 'identification', component: IdentificationComponent }
 ];

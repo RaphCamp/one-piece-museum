@@ -6,27 +6,27 @@
     <div *ngFor="let piece of pieces" class="p-2" >
       <div class="card bg-light mb-3" class="gallery" >
         <div class="card-header" >
-                  {{piece.id}} : {{piece.name | uppercase}} 
+          <a routerLink="/detail/{{piece.id}}" ><h5>{{piece.id}} : {{piece.name | uppercase}}</h5></a>         
         </div>
         <div class="card-body">
           <a target="_blank" href="../../images/Akainu.jpg">
             <img src="../../images/Akainu.jpg" alt="Akainu" width="600" height="400">
           </a>
-          <p>      <button [class.selected]="piece === selectedPiece" type="button" (click)="onSelect(piece)">Select</button>     </p>
         </div>
       </div>
     </div>
   </div>
   
-  
-  <h3>sdsd
-    
-  </h3>
-  <br><br>
-  <p>ssdsd</p>
-  
-    <app-detail-view [piece]="selectedPiece"></app-detail-view>
-  
+ <div>
+  <label for="new-piece">Nom du personnage: </label>
+  <input id="new-piece" #pieceName />
+
+  <!-- (click) passes input value to add() and then clears the input -->
+  <button type="button" class="add-button" (click)="add(pieceName.value); pieceName.value=''">
+    Ajouter
+  </button>
+ </div>
+
 
 </div>
 
