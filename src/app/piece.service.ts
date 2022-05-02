@@ -7,7 +7,9 @@ import { Piece } from './piece';
 import { PIECES } from './mock-pieces';
 
 import { HttpClient, HttpHeaders } from '@angular/common/http';
-import { catchError, map, tap } from 'rxjs/operators';
+import { catchError, map, switchMap, tap } from 'rxjs/operators';
+
+import { BehaviorSubject } from 'rxjs';
 
 @Injectable({
   providedIn: 'root'
@@ -28,7 +30,9 @@ export class PieceService {
   private piecesUrl = 'api/pieces';
 
   getPieces() : Observable<Piece[]> {
-    const pieces = this.http.get<Piece[]>(this.piecesUrl).pipe(tap(_ => this.log('fetched pieces')),catchError(this.handleError<Piece[]>('getPieces',[])));
+    const pieces = this.http.get<Piece[]>(this.piecesUrl).pipe(tap(_ => this.log('fetched pieces')),catchError(this.handleError<Piece[]>('getPieces',[]))
+    );
+    
     return pieces;
   }
 
@@ -36,6 +40,8 @@ export class PieceService {
     const url = `${this.piecesUrl}/${id}`;
     return this.http.get<Piece>(url).pipe(tap(_ => this.log(`fetched piece id=${id}`)),catchError(this.handleError<Piece>(`getPiece id=${id}`)));
   }
+
+
 
   /**
  * Handle Http operation that failed.
@@ -84,17 +90,27 @@ export class PieceService {
     );
   }
 
-  /* GET heroes whose name contains search term */
-searchPieces(term: string): Observable<Piece[]> {
-  if (!term.trim()) {
-    // if not search term, return empty hero array.
-    return of([]);
+    /* GET heroes whose name contains search term */
+  searchPieces(term: string): Observable<Piece[]> {
+    if (!term.trim()) {
+      // if not search term, return empty hero array.
+      return of([]);
+    }
+    return this.http.get<Piece[]>(`${this.piecesUrl}/?name=${term}`).pipe(
+      tap(x => x.length ?
+        this.log(`found pieces matching "${term}"`) :
+        this.log(`no pieces matching "${term}"`)),
+      catchError(this.handleError<Piece[]>('searchPieces', []))
+    );
   }
-  return this.http.get<Piece[]>(`${this.piecesUrl}/?name=${term}`).pipe(
-    tap(x => x.length ?
-       this.log(`found pieces matching "${term}"`) :
-       this.log(`no pieces matching "${term}"`)),
-    catchError(this.handleError<Piece[]>('searchPieces', []))
-  );
-}
+
+
+  private filter = new BehaviorSubject('');
+  currentFilter = this.filter.asObservable();
+
+  changeFilter(message:string) {
+    this.filter.next(message)
+  }
+
+
 }

@@ -1,63 +1,65 @@
 
-<div *ngIf="piece">
-    <h3>{{piece.name | uppercase}} </h3>
-    <div>
-      <label for="name">Nom du personnage: </label>
-      <input id="name" [(ngModel)]="piece.name" placeholder="name">
-    </div>
-  
+<div class="body" *ngIf="piece">
   
     <h1>{{piece.name | uppercase}}</h1>
     <div id="haut" class="d-flex flex-row justify-content-center" >
             <div id="photo" class="card bg-light mb-3">
                 <div class="card-header" > <h4>Photo</h4></div>
                 <div class="card-body">
-                    <a target="_blank" href="../../images/Akainu.jpg">
-                        <img src="../../images/Akainu.jpg" alt="Akainu" width="600" height="400">
+                    <a target="_blank" href="{{piece.photo}}">
+                        <img id="photoProfil" src="{{piece.photo}}" alt="{{piece.name}}" width="600" height="400" />
                       </a>    
                 </div>
             </div>
             <div id="description" class="card text-white bg-dark mb-3"> 
                 <div class="card-header" > <h4>Description</h4></div>
                 <div class="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit. Porro sed blanditiis excepturi tempore nesciunt voluptate. Quam iusto cumque omnis fuga amet.
+                   <p class="card-text">{{piece.desc}}</p> 
                 </div>
             </div>
             <div id="infos" class="card bg-light mb-3">
                 <div class="card-header" > <h4>Informations</h4></div>
                 <div id="prix" class="card-body">
                     <h5>Prix :</h5>
-                    <p> 50 euros </p>
+                    <p class="card-text"> {{piece.prix}} euros </p>
                 </div>
                 <div id="note" class="card-body">
                     <h5>Note :</h5>
-                    <p> 8/10 </p>   
+                    <p class="card-text"> {{piece.note}}/10 </p>   
                 </div>
                 <div id="date" class="card-body">
                     <h5>Date :</h5>
-                    <p> janvier 2019 </p>  
+                    <p class="card-text"> {{piece.date}} </p>  
                 </div>
             </div>    
         </div>
-    <div id="galerie" class="d-flex flex-row justify-content-center" >
-        <div class="card bg-light mb-3">
+    <div  class="d-flex flex-row justify-content-center" >
+        <div  id="galerie" class="card bg-light mb-3">
             <div class="card-header" > <h4>Galerie</h4></div>
             <div class="card-body">
-                <a target="_blank" href="../../images/Akainu.jpg">
-                    <img src="../../images/Akainu.jpg" alt="Akainu" width="600" height="400">
-                  </a>    
-                  <a target="_blank" href="../../images/Akainu.jpg">
-                    <img src="../../images/Akainu.jpg" alt="Akainu" width="600" height="400">
-                  </a>    
-
-                  <a target="_blank" href="../../images/Akainu.jpg">
-                    <img src="../../images/Akainu.jpg" alt="Akainu" width="600" height="400">
-                  </a>    
-
+                <ng-container *ngFor="let p of piece.galerie">
+                    <a target="_blank" href="{{p}}">
+                        <img src="{{p}}" alt="{{piece.name}}" width="600" height="400">
+                      </a>    
+                    </ng-container>
             </div>
         </div>
     </div>
-    <button type="button" class="delete" title="delete piece" (click)="delete(piece)">Supprimer</button>
+
+    <div id="modifier">
+
+      <label for="name">Nom du personnage: </label>
+      <input id="name" [(ngModel)]="piece.name" placeholder="name">
+    </div>
+    
+    <br>
+    <br>
+    <br>
+
+    <div id="supprimer">
+        <button type="button" class="delete" title="delete piece" (click)="delete(piece)">Supprimer</button>
+    </div>
+
 </div>
 <button type="button" (click)="save()">save</button>
 <button type="button" (click)="goBack()">go back</button>

@@ -2,18 +2,27 @@
   
   <h2>Mes Pièces</h2>
 
+<p >{{messageChild}}</p>  
   <div class="d-flex flex-row justify-content-center flex-wrap">
-    <div *ngFor="let piece of pieces" class="p-2" >
-      <div class="card bg-light mb-3" class="gallery" >
-        <div class="card-header" >
-          <a routerLink="/detail/{{piece.id}}" ><h5>{{piece.id}} : {{piece.name | uppercase}}</h5></a>         
-        </div>
-        <div class="card-body">
-          <a target="_blank" href="../../images/Akainu.jpg">
-            <img src="../../images/Akainu.jpg" alt="Akainu" width="600" height="400">
-          </a>
-        </div>
+    <div *ngFor="let piece of filteredPieces() " class="p-2" >
+        <div class="card bg-light mb-3" class="gallery" >
+          <div class="card-header" >
+            <a routerLink="/detail/{{piece.id}}" ><h5>{{piece.id}} : {{piece.name | uppercase}}</h5></a>         
+          </div>
+          <div class="d-block user-select-none">
+            <a target="_blank" href="{{piece.photo}}">
+              <img src="{{piece.photo}}" alt="{{piece.name}}" width="600" height="400">
+            </a>
+          </div>
+          <div class="card-body">
+            <p class="card-text">{{piece.desc}}</p>
+          </div>
+          <div class="card-body">
+            <h5>Note:</h5>
+            <p class="card-text">{{piece.note}}/10</p>
+          </div>
       </div>
+
     </div>
   </div>
   

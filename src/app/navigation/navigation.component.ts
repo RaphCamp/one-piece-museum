@@ -9,6 +9,8 @@ import {
 import { Piece } from '../piece';
 import { PieceService } from '../piece.service';
 
+import { MuseeComponent } from '../musee/musee.component';
+
 @Component({
   selector: 'app-navigation',
   templateUrl: './navigation.component.html',
@@ -16,27 +18,23 @@ import { PieceService } from '../piece.service';
 })
 export class NavigationComponent implements OnInit {
 
-  constructor(private pieceService: PieceService) { }
+  constructor(
+    private pieceService: PieceService,
+    ) { }
 
-  pieces$!: Observable<Piece[]>;
-
-  private searchTerms = new Subject<string>();
+  ngOnInit(): void {
+    this.pieceService.currentFilter.subscribe(message => this.messageParent = message);
+  }
 
   // Push a search term into the observable stream.
   search(term: string): void {
-    this.searchTerms.next(term);
+    this.pieceService.changeFilter(term);
+
   }
 
-  ngOnInit(): void {
-    this.pieces$ = this.searchTerms.pipe(
-      // wait 300ms after each keystroke before considering the term
-      debounceTime(300),
+  messageParent! : string;
 
-      // ignore new term if same as previous term
-      distinctUntilChanged(),
 
-      // switch to new search observable each time the term changes
-      switchMap((term: string) => this.pieceService.searchPieces(term)),
-    );
-  }
+
+  
 }
